@@ -196,34 +196,46 @@
     .menu { background: var(--cream); }
     .menu-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem;
     }
     .menu-card {
-      background: white; border-radius: 1.5rem;
-      overflow: hidden; transition: transform 0.25s, box-shadow 0.25s;
-      box-shadow: 0 2px 12px rgba(59,31,14,0.06);
-      cursor: pointer;
+      background: white; border-radius: 2rem;
+      overflow: hidden; transition: transform 0.3s cubic-bezier(.22,.68,0,1.2), box-shadow 0.3s;
+      box-shadow: 0 2px 16px rgba(59,31,14,0.07);
+      cursor: pointer; display: flex; flex-direction: column;
     }
-    .menu-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(59,31,14,0.12); }
-    .menu-card-img { height: 220px; overflow: hidden; position: relative; }
-    .menu-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
-    .menu-card:hover .menu-card-img img { transform: scale(1.05); }
-    .menu-card-body { padding: 1.5rem; }
+    .menu-card:hover { transform: translateY(-10px); box-shadow: 0 24px 60px rgba(59,31,14,0.14); }
+    .menu-card-img {
+      height: 280px; overflow: hidden; position: relative;
+      background: var(--rose-light);
+    }
+    .menu-card-img img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.5s cubic-bezier(.22,.68,0,1.2);
+    }
+    .menu-card:hover .menu-card-img img { transform: scale(1.07); }
+    .menu-card-img::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(43,20,8,0.18) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .menu-card-body { padding: 1.6rem; flex: 1; display: flex; flex-direction: column; }
     .menu-card-body h3 {
       font-family: 'Playfair Display', serif;
-      font-size: 1.2rem; color: var(--brown); margin-bottom: 0.4rem;
+      font-size: 1.25rem; color: var(--brown); margin-bottom: 0.5rem; font-weight: 700;
     }
-    .menu-card-body p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1rem; }
-    .menu-card-footer { display: flex; align-items: center; justify-content: space-between; }
-    .price { font-weight: 700; color: var(--rose); font-size: 1rem; }
+    .menu-card-body p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 1.2rem; flex: 1; }
+    .menu-card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
+    .price { font-weight: 700; color: var(--rose); font-size: 0.95rem; letter-spacing: 0.01em; }
     .order-chip {
-      background: var(--rose-light); color: var(--brown);
-      padding: 0.4rem 1rem; border-radius: 50px;
+      background: var(--brown); color: white;
+      padding: 0.5rem 1.2rem; border-radius: 50px;
       font-size: 0.8rem; font-weight: 600;
       text-decoration: none; transition: all 0.2s;
+      letter-spacing: 0.02em;
     }
-    .order-chip:hover { background: var(--rose); color: white; }
+    .order-chip:hover { background: var(--rose); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(201,132,122,0.4); }
 
     /* SPECIALS RIBBON */
     .specials {
@@ -615,7 +627,7 @@
       </div>
       <div class="menu-card">
         <div class="menu-card-img">
-          <img src="/images/wedding-cake.jpg" alt="Wedding Cake" loading="lazy" />
+          <img src="/images/wedding-cake.jpg" style="object-position: center 10%;" alt="Wedding Cake" loading="lazy" />
         </div>
         <div class="menu-card-body">
           <h3>Wedding & Occasion Cakes</h3>
@@ -920,3 +932,5 @@ Sent from zamzambakes.vercel.app`;
 </script>
 </body>
 </html>
+
+
