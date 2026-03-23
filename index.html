@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zamzam Bakes — Homemade with Love, Mangalore</title>
+  <meta name="description" content="Handcrafted cakes, cupcakes and custom bakes from Mangalore. Order now for BC Road & Moodbidri delivery." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #FDF6EE;
+      --warm: #FAF0E0;
+      --rose: #C9847A;
+      --rose-light: #F2D5CF;
+      --brown: #3B1F0E;
+      --brown-mid: #6B3A22;
+      --gold: #C8994A;
+      --gold-light: #F0DFB8;
+      --text: #2C1A0E;
+      --text-muted: #7A5C46;
+      --white: #FFFFFF;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--text); overflow-x: hidden; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 2rem;
+      background: rgba(253, 246, 238, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201, 132, 122, 0.15);
+      transition: all 0.3s;
+    }
+    nav.scrolled { box-shadow: 0 2px 20px rgba(59,31,14,0.08); }
+    .nav-logo {
+      display: flex; align-items: center; gap: 0.6rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; font-weight: 700; color: var(--brown);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--rose); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--brown-mid); font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--rose); }
+    .nav-order-btn {
+      background: var(--rose); color: white;
+      padding: 0.55rem 1.4rem; border-radius: 50px;
+      text-decoration: none; font-size: 0.85rem; font-weight: 600;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .nav-order-btn:hover { background: var(--brown); transform: translateY(-1px); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--brown); border-radius: 2px; transition: all 0.3s; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 7rem 4rem 4rem;
+      gap: 3rem;
+      background: linear-gradient(135deg, var(--cream) 0%, var(--warm) 100%);
+    }
+    .hero-text h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      line-height: 1.15; color: var(--brown);
+      margin-bottom: 1.2rem;
+    }
+    .hero-text h1 em { color: var(--rose); font-style: italic; }
+    .hero-text p {
+      font-size: 1.05rem; color: var(--text-muted);
+      line-height: 1.7; max-width: 460px;
+      margin-bottom: 2rem;
+    }
+    .hero-badges {
+      display: flex; gap: 0.75rem; flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+    .badge {
+      background: var(--rose-light); color: var(--brown);
+      padding: 0.35rem 1rem; border-radius: 50px;
+      font-size: 0.8rem; font-weight: 500;
+    }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--rose); color: white;
+      padding: 0.9rem 2rem; border-radius: 50px;
+      text-decoration: none; font-weight: 600;
+      font-size: 0.95rem; transition: all 0.2s;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-primary:hover { background: var(--brown); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,132,122,0.35); }
+    .btn-secondary {
+      background: transparent; color: var(--brown);
+      padding: 0.9rem 2rem; border-radius: 50px;
+      text-decoration: none; font-weight: 600;
+      font-size: 0.95rem; border: 2px solid var(--brown);
+      transition: all 0.2s;
+    }
+    .btn-secondary:hover { background: var(--brown); color: white; }
+    .hero-image {
+      position: relative; border-radius: 2rem; overflow: hidden;
+      height: 520px; box-shadow: 0 24px 60px rgba(59,31,14,0.2);
+    }
+    .hero-image img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-image::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(59,31,14,0.3) 0%, transparent 50%);
+    }
+    .hero-tag {
+      position: absolute; bottom: 1.5rem; left: 1.5rem; z-index: 2;
+      background: white; border-radius: 1rem;
+      padding: 0.75rem 1.2rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .hero-tag-icon { font-size: 1.5rem; }
+    .hero-tag-text { font-size: 0.75rem; color: var(--text-muted); }
+    .hero-tag-text strong { display: block; color: var(--brown); font-size: 0.9rem; }
+
+    /* STATS */
+    .stats {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--rose-light);
+    }
+    .stat {
+      background: var(--cream); padding: 2.5rem 2rem;
+      text-align: center;
+    }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem; font-weight: 700; color: var(--rose);
+    }
+    .stat-label { font-size: 0.9rem; color: var(--text-muted); margin-top: 0.25rem; }
+
+    /* SECTION COMMON */
+    section { padding: 5rem 2rem; }
+    .section-tag {
+      display: inline-block;
+      background: var(--rose-light); color: var(--rose);
+      padding: 0.35rem 1rem; border-radius: 50px;
+      font-size: 0.8rem; font-weight: 600; letter-spacing: 0.05em;
+      text-transform: uppercase; margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      color: var(--brown); line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .section-sub {
+      font-size: 1rem; color: var(--text-muted);
+      line-height: 1.7; max-width: 520px;
+    }
+    .section-header { text-align: center; margin-bottom: 3.5rem; }
+    .section-header .section-sub { margin: 0 auto; }
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    /* ABOUT */
+    .about { background: var(--white); }
+    .about-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: center;
+    }
+    .about-images {
+      display: grid; grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 1rem; height: 480px;
+    }
+    .about-img {
+      border-radius: 1.2rem; overflow: hidden;
+    }
+    .about-img img { width: 100%; height: 100%; object-fit: cover; }
+    .about-img:first-child { grid-row: span 2; }
+    .about-text ul {
+      list-style: none; margin: 1.5rem 0 2rem;
+    }
+    .about-text ul li {
+      display: flex; align-items: flex-start; gap: 0.75rem;
+      padding: 0.6rem 0; border-bottom: 1px solid var(--rose-light);
+      font-size: 0.95rem; color: var(--text-muted);
+    }
+    .about-text ul li::before {
+      content: '✦'; color: var(--rose); flex-shrink: 0; margin-top: 0.1rem;
+    }
+
+    /* MENU */
+    .menu { background: var(--cream); }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .menu-card {
+      background: white; border-radius: 1.5rem;
+      overflow: hidden; transition: transform 0.25s, box-shadow 0.25s;
+      box-shadow: 0 2px 12px rgba(59,31,14,0.06);
+      cursor: pointer;
+    }
+    .menu-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(59,31,14,0.12); }
+    .menu-card-img { height: 220px; overflow: hidden; position: relative; }
+    .menu-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+    .menu-card:hover .menu-card-img img { transform: scale(1.05); }
+    .menu-card-body { padding: 1.5rem; }
+    .menu-card-body h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; color: var(--brown); margin-bottom: 0.4rem;
+    }
+    .menu-card-body p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1rem; }
+    .menu-card-footer { display: flex; align-items: center; justify-content: space-between; }
+    .price { font-weight: 700; color: var(--rose); font-size: 1rem; }
+    .order-chip {
+      background: var(--rose-light); color: var(--brown);
+      padding: 0.4rem 1rem; border-radius: 50px;
+      font-size: 0.8rem; font-weight: 600;
+      text-decoration: none; transition: all 0.2s;
+    }
+    .order-chip:hover { background: var(--rose); color: white; }
+
+    /* SPECIALS RIBBON */
+    .specials {
+      background: var(--brown);
+      padding: 2rem;
+      overflow: hidden;
+    }
+    .ribbon {
+      display: flex; gap: 3rem;
+      animation: scroll-ribbon 20s linear infinite;
+      white-space: nowrap;
+    }
+    .ribbon span {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; color: var(--gold-light);
+      flex-shrink: 0;
+    }
+    .ribbon span::before { content: '✦  '; color: var(--gold); }
+    @keyframes scroll-ribbon {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* HOW IT WORKS */
+    .how { background: var(--white); }
+    .steps {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 2rem; position: relative;
+    }
+    .steps::before {
+      content: '';
+      position: absolute; top: 2rem; left: 10%; right: 10%; height: 2px;
+      background: linear-gradient(to right, var(--rose-light), var(--rose), var(--rose-light));
+      z-index: 0;
+    }
+    .step { text-align: center; position: relative; z-index: 1; }
+    .step-num {
+      width: 4rem; height: 4rem; border-radius: 50%;
+      background: var(--rose); color: white;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.2rem;
+      box-shadow: 0 4px 16px rgba(201,132,122,0.4);
+    }
+    .step h3 { font-size: 1rem; color: var(--brown); margin-bottom: 0.4rem; font-weight: 600; }
+    .step p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+
+    /* ORDER FORM */
+    .order-section { background: linear-gradient(135deg, var(--brown) 0%, var(--brown-mid) 100%); }
+    .order-section .section-tag { background: rgba(201,132,122,0.2); color: var(--rose-light); }
+    .order-section .section-title { color: white; }
+    .order-section .section-sub { color: rgba(255,255,255,0.7); }
+    .order-form {
+      background: white; border-radius: 2rem;
+      padding: 2.5rem; max-width: 700px; margin: 0 auto;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.2);
+    }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-group.full { grid-column: span 2; }
+    .form-group label { font-size: 0.85rem; font-weight: 600; color: var(--brown); }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      border: 1.5px solid var(--rose-light); border-radius: 0.75rem;
+      padding: 0.8rem 1rem; font-size: 0.9rem;
+      font-family: 'Inter', sans-serif; color: var(--text);
+      background: var(--cream); outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--rose);
+      box-shadow: 0 0 0 3px rgba(201,132,122,0.12);
+    }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .form-submit {
+      width: 100%; margin-top: 1.5rem;
+      background: #25D366; color: white;
+      border: none; border-radius: 50px;
+      padding: 1rem; font-size: 1rem; font-weight: 700;
+      cursor: pointer; display: flex; align-items: center;
+      justify-content: center; gap: 0.6rem;
+      transition: all 0.2s; font-family: 'Inter', sans-serif;
+    }
+    .form-submit:hover { background: #1DAE57; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,211,102,0.35); }
+    .form-note {
+      text-align: center; margin-top: 1rem;
+      font-size: 0.8rem; color: var(--text-muted);
+    }
+
+    /* GALLERY */
+    .gallery { background: var(--cream); }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: 200px 200px;
+      gap: 1rem;
+    }
+    .gallery-item {
+      border-radius: 1rem; overflow: hidden;
+      position: relative;
+    }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+    .gallery-item:hover img { transform: scale(1.06); }
+    .gallery-item:first-child { grid-column: span 2; grid-row: span 2; }
+    .gallery-item:nth-child(4) { grid-column: span 2; }
+    .gallery-overlay {
+      position: absolute; inset: 0;
+      background: rgba(59,31,14,0); display: flex;
+      align-items: center; justify-content: center;
+      transition: background 0.3s;
+    }
+    .gallery-item:hover .gallery-overlay { background: rgba(59,31,14,0.35); }
+    .gallery-overlay a {
+      color: white; text-decoration: none;
+      font-size: 0.85rem; font-weight: 600;
+      background: rgba(255,255,255,0.2);
+      padding: 0.5rem 1.2rem; border-radius: 50px;
+      opacity: 0; transform: translateY(8px);
+      transition: all 0.3s; border: 1px solid rgba(255,255,255,0.4);
+    }
+    .gallery-item:hover .gallery-overlay a { opacity: 1; transform: translateY(0); }
+
+    /* LOCATION */
+    .location-section { background: var(--white); }
+    .location-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+    .location-cards { display: flex; flex-direction: column; gap: 1.2rem; }
+    .location-card {
+      background: var(--cream); border-radius: 1.2rem;
+      padding: 1.5rem; display: flex; align-items: flex-start; gap: 1rem;
+      border: 1.5px solid var(--rose-light);
+    }
+    .location-icon {
+      width: 3rem; height: 3rem; border-radius: 0.75rem;
+      background: var(--rose); display: flex; align-items: center;
+      justify-content: center; font-size: 1.2rem; flex-shrink: 0;
+    }
+    .location-card h3 { font-size: 1rem; color: var(--brown); font-weight: 600; margin-bottom: 0.25rem; }
+    .location-card p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.5; }
+    .map-embed { border-radius: 1.5rem; overflow: hidden; height: 360px; box-shadow: 0 8px 32px rgba(59,31,14,0.1); }
+    .map-embed iframe { width: 100%; height: 100%; border: none; }
+
+    /* INSTAGRAM */
+    .instagram-section { background: var(--brown); padding: 4rem 2rem; text-align: center; }
+    .instagram-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; color: white; margin-bottom: 0.75rem;
+    }
+    .instagram-section p { color: rgba(255,255,255,0.7); margin-bottom: 2rem; }
+    .insta-btn {
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+      color: white; text-decoration: none;
+      padding: 0.9rem 2.5rem; border-radius: 50px;
+      font-weight: 700; font-size: 1rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .insta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(220,39,67,0.4); }
+
+    /* FOOTER */
+    footer {
+      background: #1E0E06; color: rgba(255,255,255,0.6);
+      padding: 2.5rem 2rem; text-align: center;
+    }
+    footer .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; color: white; margin-bottom: 0.5rem;
+    }
+    footer .footer-logo span { color: var(--rose); }
+    footer p { font-size: 0.85rem; line-height: 1.6; }
+    footer a { color: var(--rose-light); text-decoration: none; }
+
+    /* WHATSAPP FLOAT */
+    .wa-float {
+      position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 99;
+      width: 3.5rem; height: 3.5rem; border-radius: 50%;
+      background: #25D366; display: flex; align-items: center;
+      justify-content: center; box-shadow: 0 4px 20px rgba(37,211,102,0.5);
+      text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
+      animation: pulse-wa 2s ease-in-out infinite;
+    }
+    .wa-float:hover { transform: scale(1.1); box-shadow: 0 8px 30px rgba(37,211,102,0.6); }
+    @keyframes pulse-wa {
+      0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.5); }
+      50% { box-shadow: 0 4px 32px rgba(37,211,102,0.8); }
+    }
+    .wa-float svg { width: 1.8rem; height: 1.8rem; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; padding: 6rem 1.5rem 3rem; text-align: center; }
+      .hero-text p { margin: 0 auto 2rem; }
+      .hero-badges, .hero-btns { justify-content: center; }
+      .hero-image { height: 350px; }
+      .about-inner { grid-template-columns: 1fr; }
+      .about-images { height: 300px; }
+      .steps { grid-template-columns: 1fr 1fr; }
+      .steps::before { display: none; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+      .gallery-item:first-child { grid-column: span 2; height: 220px; }
+      .gallery-item:nth-child(4) { grid-column: span 1; }
+      .location-grid { grid-template-columns: 1fr; }
+      .stats { grid-template-columns: 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-group.full { grid-column: span 1; }
+      .nav-links, .nav-order-btn { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    /* Mobile menu */
+    .mobile-menu {
+      display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--cream); z-index: 200;
+      flex-direction: column; align-items: center; justify-content: center;
+      gap: 2rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; color: var(--brown); text-decoration: none;
+    }
+    .mobile-menu-close {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      background: none; border: none; font-size: 2rem;
+      cursor: pointer; color: var(--brown);
+    }
+    .mobile-menu .btn-primary { font-size: 1rem; }
+  </style>
+</head>
+<body>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" onclick="toggleMenu()">×</button>
+  <a href="#menu" onclick="toggleMenu()">Our Bakes</a>
+  <a href="#how" onclick="toggleMenu()">How It Works</a>
+  <a href="#order" onclick="toggleMenu()">Order Now</a>
+  <a href="#location" onclick="toggleMenu()">Location</a>
+  <a href="#order" class="btn-primary" onclick="toggleMenu()">Place Order</a>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">Zamzam <span>Bakes</span></a>
+  <ul class="nav-links">
+    <li><a href="#menu">Our Bakes</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#order">Order</a></li>
+    <li><a href="#location">Location</a></li>
+  </ul>
+  <a href="#order" class="nav-order-btn">Order Now</a>
+  <button class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-text">
+    <div class="section-tag">Homemade with Love ✦ Mangalore</div>
+    <h1>Baked Fresh,<br>Just for <em>You</em></h1>
+    <p>Custom cakes, cupcakes and sweet treats crafted with the finest ingredients — straight from our home kitchen in Mangalore to your celebrations.</p>
+    <div class="hero-badges">
+      <span class="badge">🎂 Custom Cakes</span>
+      <span class="badge">🧁 Cupcakes</span>
+      <span class="badge">🍰 Pastries</span>
+      <span class="badge">🍪 Cookies</span>
+    </div>
+    <div class="hero-btns">
+      <a href="#order" class="btn-primary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Order on WhatsApp
+      </a>
+      <a href="#menu" class="btn-secondary">See Our Menu</a>
+    </div>
+  </div>
+  <div class="hero-image">
+    <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&q=85" alt="Beautiful layered cake" loading="eager" />
+    <div class="hero-tag">
+      <div class="hero-tag-icon">🏠</div>
+      <div class="hero-tag-text">
+        <strong>Home Kitchen</strong>
+        BC Road & Moodbidri, Mangalore
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Fresh Ingredients</div></div>
+  <div class="stat"><div class="stat-num">Custom</div><div class="stat-label">Every Order is Unique</div></div>
+  <div class="stat"><div class="stat-num">2</div><div class="stat-label">Locations — Mangalore & Moodbidri</div></div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-inner">
+      <div class="about-images">
+        <div class="about-img">
+          <img src="https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=600&q=85" alt="Macarons" loading="lazy" />
+        </div>
+        <div class="about-img">
+          <img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=600&q=85" alt="Cupcakes" loading="lazy" />
+        </div>
+        <div class="about-img">
+          <img src="https://images.unsplash.com/photo-1488477181213-02e3c7dfb6d4?w=600&q=85" alt="Cake" loading="lazy" />
+        </div>
+      </div>
+      <div class="about-text">
+        <div class="section-tag">Our Story</div>
+        <h2 class="section-title">Made at Home,<br>Baked with Passion</h2>
+        <p class="section-sub">At Zamzam Bakes, every creation starts with love and the finest ingredients. We're a home-based bakery serving Mangalore — because the best bakes come from a real kitchen.</p>
+        <ul>
+          <li>Freshly baked on order — never stored</li>
+          <li>Custom flavours, designs and sizes</li>
+          <li>Eggless options available</li>
+          <li>Serving BC Road, Mangalore & Moodbidri</li>
+          <li>Orders via WhatsApp — fast and easy</li>
+        </ul>
+        <a href="#order" class="btn-primary" style="display:inline-flex;">Place a Custom Order</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCROLLING RIBBON -->
+<div class="specials">
+  <div class="ribbon" id="ribbon">
+    <span>Custom Birthday Cakes</span>
+    <span>Wedding Cakes</span>
+    <span>Cupcakes</span>
+    <span>Brownies</span>
+    <span>Macarons</span>
+    <span>Cookies</span>
+    <span>Pastries</span>
+    <span>Eggless Options</span>
+    <span>Anniversary Cakes</span>
+    <span>Custom Birthday Cakes</span>
+    <span>Wedding Cakes</span>
+    <span>Cupcakes</span>
+    <span>Brownies</span>
+    <span>Macarons</span>
+    <span>Cookies</span>
+    <span>Pastries</span>
+    <span>Eggless Options</span>
+    <span>Anniversary Cakes</span>
+  </div>
+</div>
+
+<!-- MENU -->
+<section class="menu" id="menu">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">Our Specialties</div>
+      <h2 class="section-title">What We Bake</h2>
+      <p class="section-sub">Every item is made fresh on order. No preservatives, no shortcuts — just real baking.</p>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-card">
+        <div class="menu-card-img">
+          <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&q=80" alt="Custom Cake" loading="lazy" />
+        </div>
+        <div class="menu-card-body">
+          <h3>Custom Cakes</h3>
+          <p>Designed just for you — birthdays, anniversaries, weddings, or any occasion. Any flavour, any theme.</p>
+          <div class="menu-card-footer">
+            <span class="price">Starting ₹499</span>
+            <a href="#order" class="order-chip">Order Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-card-img">
+          <img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=600&q=80" alt="Cupcakes" loading="lazy" />
+        </div>
+        <div class="menu-card-body">
+          <h3>Cupcakes</h3>
+          <p>Soft, fluffy cupcakes with rich frosting. Available in chocolate, vanilla, red velvet, and more.</p>
+          <div class="menu-card-footer">
+            <span class="price">Starting ₹60/pc</span>
+            <a href="#order" class="order-chip">Order Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-card-img">
+          <img src="https://images.unsplash.com/photo-1587248720327-8c58bbcbce93?w=600&q=80" alt="Wedding Cake" loading="lazy" />
+        </div>
+        <div class="menu-card-body">
+          <h3>Wedding & Occasion Cakes</h3>
+          <p>Elegant, multi-tiered cakes for your most special moments. Custom designs to match your vision.</p>
+          <div class="menu-card-footer">
+            <span class="price">On Request</span>
+            <a href="#order" class="order-chip">Order Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-card-img">
+          <img src="https://images.unsplash.com/photo-1548365328-8c6db3220e4c?w=600&q=80" alt="Brownies and cookies" loading="lazy" />
+        </div>
+        <div class="menu-card-body">
+          <h3>Brownies & Cookies</h3>
+          <p>Fudgy brownies and crisp cookies — perfect for gifting or just treating yourself.</p>
+          <div class="menu-card-footer">
+            <span class="price">Starting ₹40/pc</span>
+            <a href="#order" class="order-chip">Order Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-card-img">
+          <img src="https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=600&q=80" alt="Macarons" loading="lazy" />
+        </div>
+        <div class="menu-card-body">
+          <h3>Macarons & Pastries</h3>
+          <p>Delicate French macarons and fresh pastries in seasonal flavours.</p>
+          <div class="menu-card-footer">
+            <span class="price">Starting ₹80/pc</span>
+            <a href="#order" class="order-chip">Order Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-card-img">
+          <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=600&q=80" alt="Eggless Cake" loading="lazy" />
+        </div>
+        <div class="menu-card-body">
+          <h3>Eggless Specials</h3>
+          <p>All our bakes are available in eggless variants — same taste, same love, no eggs.</p>
+          <div class="menu-card-footer">
+            <span class="price">Available on all items</span>
+            <a href="#order" class="order-chip">Order Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">Simple Process</div>
+      <h2 class="section-title">How to Order</h2>
+      <p class="section-sub">Getting your custom bake is as easy as sending a message.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Fill the Form</h3>
+        <p>Tell us what you want — type, flavour, date, and any special design notes.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>We Confirm</h3>
+        <p>We'll reply on WhatsApp to confirm your order and share final pricing.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>We Bake</h3>
+        <p>Your order is freshly baked on the day — never stored, always fresh.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h3>Pickup / Deliver</h3>
+        <p>Collect from BC Road or Moodbidri, or we'll arrange delivery nearby.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORDER FORM -->
+<section class="order-section" id="order">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">Place an Order</div>
+      <h2 class="section-title">Let's Bake Something Special</h2>
+      <p class="section-sub">Fill in the details below and we'll reach out on WhatsApp to confirm.</p>
+    </div>
+    <div class="order-form">
+      <form id="orderForm" onsubmit="submitOrder(event)">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="name">Your Name *</label>
+            <input type="text" id="name" placeholder="e.g. Sara Ahmed" required />
+          </div>
+          <div class="form-group">
+            <label for="phone">WhatsApp Number *</label>
+            <input type="tel" id="phone" placeholder="+91 98765 43210" required />
+          </div>
+          <div class="form-group">
+            <label for="item">What do you want? *</label>
+            <select id="item" required>
+              <option value="">Select item...</option>
+              <option>Custom Birthday Cake</option>
+              <option>Wedding / Anniversary Cake</option>
+              <option>Cupcakes</option>
+              <option>Brownies</option>
+              <option>Cookies</option>
+              <option>Macarons</option>
+              <option>Pastries</option>
+              <option>Other / Surprise me</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="date">Needed by *</label>
+            <input type="date" id="date" required />
+          </div>
+          <div class="form-group">
+            <label for="flavour">Flavour Preference</label>
+            <input type="text" id="flavour" placeholder="e.g. Chocolate, Red Velvet, Vanilla..." />
+          </div>
+          <div class="form-group">
+            <label for="eggless">Eggless?</label>
+            <select id="eggless">
+              <option value="No">No (Regular)</option>
+              <option value="Yes">Yes (Eggless)</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label for="notes">Special Instructions / Design Ideas</label>
+            <textarea id="notes" placeholder="Describe your design, write a custom message, mention size, or any other special request..."></textarea>
+          </div>
+        </div>
+        <button type="submit" class="form-submit">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Send Order on WhatsApp
+        </button>
+        <p class="form-note">We'll confirm your order within a few hours. Minimum 2 days notice for custom cakes.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">Our Work</div>
+      <h2 class="section-title">Fresh from the Kitchen</h2>
+      <p class="section-sub">A glimpse of what we create — follow us on Instagram for more.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1559620192-032c3a63b2e5?w=800&q=80" alt="White cake" loading="lazy" />
+        <div class="gallery-overlay"><a href="https://www.instagram.com/zamzam_bakes_/" target="_blank">View on Instagram</a></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=400&q=80" alt="Macarons" loading="lazy" />
+        <div class="gallery-overlay"><a href="https://www.instagram.com/zamzam_bakes_/" target="_blank">View on Instagram</a></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=400&q=80" alt="Cupcakes" loading="lazy" />
+        <div class="gallery-overlay"><a href="https://www.instagram.com/zamzam_bakes_/" target="_blank">View on Instagram</a></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=800&q=80" alt="Cake slice" loading="lazy" />
+        <div class="gallery-overlay"><a href="https://www.instagram.com/zamzam_bakes_/" target="_blank">View on Instagram</a></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1548365328-8c6db3220e4c?w=400&q=80" alt="Brownies" loading="lazy" />
+        <div class="gallery-overlay"><a href="https://www.instagram.com/zamzam_bakes_/" target="_blank">View on Instagram</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="location-section" id="location">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">Find Us</div>
+      <h2 class="section-title">Where We Are</h2>
+      <p class="section-sub">We serve BC Road, Mangalore and Moodbidri. Order online, pickup or local delivery.</p>
+    </div>
+    <div class="location-grid">
+      <div class="location-cards">
+        <div class="location-card">
+          <div class="location-icon">📍</div>
+          <div>
+            <h3>BC Road, Mangalore</h3>
+            <p>Home kitchen pickup available. WhatsApp us to arrange a time.</p>
+          </div>
+        </div>
+        <div class="location-card">
+          <div class="location-icon">📍</div>
+          <div>
+            <h3>Moodbidri</h3>
+            <p>Pickup and local delivery available in and around Moodbidri.</p>
+          </div>
+        </div>
+        <div class="location-card">
+          <div class="location-icon">📱</div>
+          <div>
+            <h3>Order via WhatsApp</h3>
+            <p>Fill the order form above or message us directly. We respond fast.</p>
+          </div>
+        </div>
+        <div class="location-card">
+          <div class="location-icon">⏰</div>
+          <div>
+            <h3>Order Lead Time</h3>
+            <p>Regular bakes: 1 day notice. Custom cakes: minimum 2–3 days advance order.</p>
+          </div>
+        </div>
+      </div>
+      <div class="map-embed">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31176.00684764305!2d74.85!3d12.87!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba35a4c37d088e3%3A0x56e18d9d3fc07f07!2sBC%20Road%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+          allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTAGRAM -->
+<div class="instagram-section">
+  <h2>Follow Our Journey</h2>
+  <p>See our latest creations on Instagram — fresh bakes every week.</p>
+  <a href="https://www.instagram.com/zamzam_bakes_/" target="_blank" rel="noopener" class="insta-btn">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+    @zamzam_bakes_
+  </a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Zamzam <span>Bakes</span></div>
+  <p>Homemade with love · BC Road, Mangalore & Moodbidri</p>
+  <p style="margin-top:0.5rem">
+    <a href="https://www.instagram.com/zamzam_bakes_/" target="_blank">Instagram</a> &nbsp;·&nbsp;
+    <a href="#order">Place an Order</a>
+  </p>
+  <p style="margin-top:1rem; font-size:0.75rem; opacity:0.4;">© 2026 Zamzam Bakes. All rights reserved.</p>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/91XXXXXXXXXX?text=Hi%20Zamzam%20Bakes!%20I'd%20like%20to%20place%20an%20order%20%F0%9F%8E%82" target="_blank" class="wa-float" title="Chat on WhatsApp" id="waFloat">
+  <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+  // Nav scroll effect
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Mobile menu
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  // Set min date to today
+  const dateInput = document.getElementById('date');
+  const today = new Date();
+  today.setDate(today.getDate() + 1);
+  dateInput.min = today.toISOString().split('T')[0];
+
+  // Order form → WhatsApp
+  function submitOrder(e) {
+    e.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const item = document.getElementById('item').value;
+    const date = document.getElementById('date').value;
+    const flavour = document.getElementById('flavour').value.trim();
+    const eggless = document.getElementById('eggless').value;
+    const notes = document.getElementById('notes').value.trim();
+
+    const msg = `🎂 *New Order - Zamzam Bakes*
+
+*Name:* ${name}
+*Phone:* ${phone}
+*Item:* ${item}
+*Needed by:* ${date}
+*Flavour:* ${flavour || 'Not specified'}
+*Eggless:* ${eggless}
+*Notes:* ${notes || 'None'}
+
+Sent from zamzambakes.vercel.app`;
+
+    const waNumber = '91XXXXXXXXXX'; // REPLACE WITH YOUR NUMBER
+    const url = `https://wa.me/${waNumber}?text=${encodeURIComponent(msg)}`;
+    window.open(url, '_blank');
+  }
+</script>
+</body>
+</html>
