@@ -72,7 +72,7 @@ zamzam-bakes/
 To change the WhatsApp number, update `waNumber` in the `<script>` block at the bottom of `index.html`:
 
 ```js
-const waNumber = '919900701382'; // Replace with your number (country code + number, no +)
+const waNumber = '919xxxxxxxxx'; // Replace with your number (country code + number, no +)
 ```
 
 ---
